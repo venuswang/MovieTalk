@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.scau.edu.ssm.movietalk.mapper.MListMapper" >
+  <resultMap id="BaseResultMap" type="cn.scau.edu.ssm.movietalk.po.MList" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="filname" property="filname" jdbcType="VARCHAR" />
+    <result column="petname" property="petname" jdbcType="VARCHAR" />
+    <result column="director" property="director" jdbcType="VARCHAR" />
+    <result column="editor" property="editor" jdbcType="VARCHAR" />
+    <result column="nation" property="nation" jdbcType="VARCHAR" />
+    <result column="voice" property="voice" jdbcType="VARCHAR" />
+    <result column="showtime" property="showtime" jdbcType="VARCHAR" />
+    <result column="addtime" property="addtime" jdbcType="VARCHAR" />
+    <result column="duration" property="duration" jdbcType="INTEGER" />
+    <result column="collectnum" property="collectnum" jdbcType="INTEGER" />
+    <result column="clicknum" property="clicknum" jdbcType="INTEGER" />
+    <result column="snum" property="snum" jdbcType="INTEGER" />
+    <result column="rate" property="rate" jdbcType="TINYINT" />
+    <result column="mtype" property="mtype" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.scau.edu.ssm.movietalk.po.MList" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, filname, petname, director, editor, nation, voice, showtime, addtime, duration, 
+    collectnum, clicknum, snum, rate, mtype, status
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.scau.edu.ssm.movietalk.po.MListExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from m_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.scau.edu.ssm.movietalk.po.MListExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from m_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from m_list
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from m_list
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.scau.edu.ssm.movietalk.po.MListExample" >
+    delete from m_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.scau.edu.ssm.movietalk.po.MList" >
+    insert into m_list (id, filname, petname, 
+      director, editor, nation, 
+      voice, showtime, addtime, 
+      duration, collectnum, clicknum, 
+      snum, rate, mtype, 
+      status, content)
+    values (#{id,jdbcType=INTEGER}, #{filname,jdbcType=VARCHAR}, #{petname,jdbcType=VARCHAR}, 
+      #{director,jdbcType=VARCHAR}, #{editor,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, 
+      #{voice,jdbcType=VARCHAR}, #{showtime,jdbcType=VARCHAR}, #{addtime,jdbcType=VARCHAR}, 
+      #{duration,jdbcType=INTEGER}, #{collectnum,jdbcType=INTEGER}, #{clicknum,jdbcType=INTEGER}, 
+      #{snum,jdbcType=INTEGER}, #{rate,jdbcType=TINYINT}, #{mtype,jdbcType=TINYINT}, 
+      #{status,jdbcType=TINYINT}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.scau.edu.ssm.movietalk.po.MList" >
+    insert into m_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="filname != null" >
+        filname,
+      </if>
+      <if test="petname != null" >
+        petname,
+      </if>
+      <if test="director != null" >
+        director,
+      </if>
+      <if test="editor != null" >
+        editor,
+      </if>
+      <if test="nation != null" >
+        nation,
+      </if>
+      <if test="voice != null" >
+        voice,
+      </if>
+      <if test="showtime != null" >
+        showtime,
+      </if>
+      <if test="addtime != null" >
+        addtime,
+      </if>
+      <if test="duration != null" >
+        duration,
+      </if>
+      <if test="collectnum != null" >
+        collectnum,
+      </if>
+      <if test="clicknum != null" >
+        clicknum,
+      </if>
+      <if test="snum != null" >
+        snum,
+      </if>
+      <if test="rate != null" >
+        rate,
+      </if>
+      <if test="mtype != null" >
+        mtype,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="filname != null" >
+        #{filname,jdbcType=VARCHAR},
+      </if>
+      <if test="petname != null" >
+        #{petname,jdbcType=VARCHAR},
+      </if>
+      <if test="director != null" >
+        #{director,jdbcType=VARCHAR},
+      </if>
+      <if test="editor != null" >
+        #{editor,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="voice != null" >
+        #{voice,jdbcType=VARCHAR},
+      </if>
+      <if test="showtime != null" >
+        #{showtime,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null" >
+        #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="collectnum != null" >
+        #{collectnum,jdbcType=INTEGER},
+      </if>
+      <if test="clicknum != null" >
+        #{clicknum,jdbcType=INTEGER},
+      </if>
+      <if test="snum != null" >
+        #{snum,jdbcType=INTEGER},
+      </if>
+      <if test="rate != null" >
+        #{rate,jdbcType=TINYINT},
+      </if>
+      <if test="mtype != null" >
+        #{mtype,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.scau.edu.ssm.movietalk.po.MListExample" resultType="java.lang.Integer" >
+    select count(*) from m_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update m_list
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.filname != null" >
+        filname = #{record.filname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.petname != null" >
+        petname = #{record.petname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.director != null" >
+        director = #{record.director,jdbcType=VARCHAR},
+      </if>
+      <if test="record.editor != null" >
+        editor = #{record.editor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nation != null" >
+        nation = #{record.nation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.voice != null" >
+        voice = #{record.voice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.showtime != null" >
+        showtime = #{record.showtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addtime != null" >
+        addtime = #{record.addtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.duration != null" >
+        duration = #{record.duration,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectnum != null" >
+        collectnum = #{record.collectnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.clicknum != null" >
+        clicknum = #{record.clicknum,jdbcType=INTEGER},
+      </if>
+      <if test="record.snum != null" >
+        snum = #{record.snum,jdbcType=INTEGER},
+      </if>
+      <if test="record.rate != null" >
+        rate = #{record.rate,jdbcType=TINYINT},
+      </if>
+      <if test="record.mtype != null" >
+        mtype = #{record.mtype,jdbcType=TINYINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update m_list
+    set id = #{record.id,jdbcType=INTEGER},
+      filname = #{record.filname,jdbcType=VARCHAR},
+      petname = #{record.petname,jdbcType=VARCHAR},
+      director = #{record.director,jdbcType=VARCHAR},
+      editor = #{record.editor,jdbcType=VARCHAR},
+      nation = #{record.nation,jdbcType=VARCHAR},
+      voice = #{record.voice,jdbcType=VARCHAR},
+      showtime = #{record.showtime,jdbcType=VARCHAR},
+      addtime = #{record.addtime,jdbcType=VARCHAR},
+      duration = #{record.duration,jdbcType=INTEGER},
+      collectnum = #{record.collectnum,jdbcType=INTEGER},
+      clicknum = #{record.clicknum,jdbcType=INTEGER},
+      snum = #{record.snum,jdbcType=INTEGER},
+      rate = #{record.rate,jdbcType=TINYINT},
+      mtype = #{record.mtype,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=TINYINT},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update m_list
+    set id = #{record.id,jdbcType=INTEGER},
+      filname = #{record.filname,jdbcType=VARCHAR},
+      petname = #{record.petname,jdbcType=VARCHAR},
+      director = #{record.director,jdbcType=VARCHAR},
+      editor = #{record.editor,jdbcType=VARCHAR},
+      nation = #{record.nation,jdbcType=VARCHAR},
+      voice = #{record.voice,jdbcType=VARCHAR},
+      showtime = #{record.showtime,jdbcType=VARCHAR},
+      addtime = #{record.addtime,jdbcType=VARCHAR},
+      duration = #{record.duration,jdbcType=INTEGER},
+      collectnum = #{record.collectnum,jdbcType=INTEGER},
+      clicknum = #{record.clicknum,jdbcType=INTEGER},
+      snum = #{record.snum,jdbcType=INTEGER},
+      rate = #{record.rate,jdbcType=TINYINT},
+      mtype = #{record.mtype,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.scau.edu.ssm.movietalk.po.MList" >
+    update m_list
+    <set >
+      <if test="filname != null" >
+        filname = #{filname,jdbcType=VARCHAR},
+      </if>
+      <if test="petname != null" >
+        petname = #{petname,jdbcType=VARCHAR},
+      </if>
+      <if test="director != null" >
+        director = #{director,jdbcType=VARCHAR},
+      </if>
+      <if test="editor != null" >
+        editor = #{editor,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="voice != null" >
+        voice = #{voice,jdbcType=VARCHAR},
+      </if>
+      <if test="showtime != null" >
+        showtime = #{showtime,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        addtime = #{addtime,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null" >
+        duration = #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="collectnum != null" >
+        collectnum = #{collectnum,jdbcType=INTEGER},
+      </if>
+      <if test="clicknum != null" >
+        clicknum = #{clicknum,jdbcType=INTEGER},
+      </if>
+      <if test="snum != null" >
+        snum = #{snum,jdbcType=INTEGER},
+      </if>
+      <if test="rate != null" >
+        rate = #{rate,jdbcType=TINYINT},
+      </if>
+      <if test="mtype != null" >
+        mtype = #{mtype,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.scau.edu.ssm.movietalk.po.MList" >
+    update m_list
+    set filname = #{filname,jdbcType=VARCHAR},
+      petname = #{petname,jdbcType=VARCHAR},
+      director = #{director,jdbcType=VARCHAR},
+      editor = #{editor,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      voice = #{voice,jdbcType=VARCHAR},
+      showtime = #{showtime,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=VARCHAR},
+      duration = #{duration,jdbcType=INTEGER},
+      collectnum = #{collectnum,jdbcType=INTEGER},
+      clicknum = #{clicknum,jdbcType=INTEGER},
+      snum = #{snum,jdbcType=INTEGER},
+      rate = #{rate,jdbcType=TINYINT},
+      mtype = #{mtype,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.scau.edu.ssm.movietalk.po.MList" >
+    update m_list
+    set filname = #{filname,jdbcType=VARCHAR},
+      petname = #{petname,jdbcType=VARCHAR},
+      director = #{director,jdbcType=VARCHAR},
+      editor = #{editor,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      voice = #{voice,jdbcType=VARCHAR},
+      showtime = #{showtime,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=VARCHAR},
+      duration = #{duration,jdbcType=INTEGER},
+      collectnum = #{collectnum,jdbcType=INTEGER},
+      clicknum = #{clicknum,jdbcType=INTEGER},
+      snum = #{snum,jdbcType=INTEGER},
+      rate = #{rate,jdbcType=TINYINT},
+      mtype = #{mtype,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

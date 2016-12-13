@@ -36,6 +36,7 @@ drop table if exists m_review_anti;
 drop table if exists m_review_reply;
 drop table if exists m_advice;
 drop table if exists m_suggestion;
+drop table if exists m_realise_dairy
 
 # 创建后台管理员表
 # status:0表示该用户废除，1表示该用户的状态是激活, default 1   
@@ -103,7 +104,7 @@ disable tinyint(1) default 0,
 sex int(10),
 email varchar(64),
 score int(11) default 0,
-image varchar(200) '/pic/default.jpg',
+image varchar(200) default '/pic/default.jpg',
 addtime varchar(15),
 login_time varchar(15),
 login_ip varchar(50),
@@ -130,7 +131,7 @@ title varchar(255),
 content text,
 addtime varchar(15),
 apname text,
-constraint mood_user_uid foreign key(uid) references m_user(id)
+constraint m_dairy_uid foreign key(uid) references m_user(id)
 );
 
 # 关注表
@@ -367,6 +368,22 @@ uid int(11),
 content text,
 adate varchar(15),
 constraint m_suggestion_uid foreign key(uid) references m_user(id)
+);
+
+# 用户登录记录
+# isp:运营商
+create table m_realise_dairy(
+id int(11) primary key auto_increment,
+ip varchar(50),
+logintime varchar(15),
+country varchar(255),
+area varchar(255),
+region varchar(255),
+city varchar(255),
+county varchar(255),
+isp varchar(255),
+uid int(11),
+constraint m_realise_dairy_uid foreign key(uid) references m_user(id)
 );
 
 # 初始化数据表
