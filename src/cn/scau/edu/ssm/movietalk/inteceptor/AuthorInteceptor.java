@@ -39,6 +39,25 @@ public class AuthorInteceptor implements HandlerInterceptor {
 			Object object) throws Exception {
 		//用户权限验证
 		String url = request.getRequestURI();
+		if(url.contains("/common/")) {
+			return true;
+		} else if(url.contains("/admin/")) {
+			HttpSession session = request.getSession();
+			String madmin = (String)session.getAttribute("madmin");
+			if(madmin != null && "true".equals(madmin.trim())) {
+				return true;
+			} else {
+				request.getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
+			}
+		} else if(url.contains("/custom/")) {
+			HttpSession session = request.getSession();
+			String username = (String)session.getAttribute("username");
+			if(username != null && username.length() > 0) {
+				return true;
+			} else {
+				request.getRequestDispatcher("customer").forward(request, response);
+			}
+		}
 		return true;
 	}
 

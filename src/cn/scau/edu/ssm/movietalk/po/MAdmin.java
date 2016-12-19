@@ -1,8 +1,16 @@
 package cn.scau.edu.ssm.movietalk.po;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+
+import cn.scau.edu.ssm.movietalk.validator.ValidGroup1;
+
 public class MAdmin {
     private Integer id;
 
+    @NotBlank(message="{madim.uname.null.error}", groups={ValidGroup1.class})
+    @Size(min=1, max=32, message="{madmin.uname.length.error}", groups={ValidGroup1.class})
     private String uname;
 
     private String fullname;
@@ -11,6 +19,8 @@ public class MAdmin {
 
     private String phone;
 
+    @NotBlank(message="{madim.pword.null.error}", groups={ValidGroup1.class})
+    @Size(min=1, max=50, message="{madmin.pword.length.error}", groups={ValidGroup1.class})
     private String pword;
 
     private String loginTime;
