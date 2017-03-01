@@ -14,4 +14,10 @@
 		http://www.springframework.org/schema/tx 
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
 	<bean id="mAdminService" class="cn.scau.edu.ssm.movietalk.service.impl.MAdminServiceImpl"></bean>
+	<bean id="mFriendLinkService" class="cn.scau.edu.ssm.movietalk.service.impl.MFriendLinkServiceImpl"></bean>
+	<bean id="mListService" class="cn.scau.edu.ssm.movietalk.service.impl.MListServiceImpl"></bean>
+	<bean id="mUserService" class="cn.scau.edu.ssm.movietalk.service.impl.MUserServiceImpl"></bean>
+	<bean id="mRealiseDairyService" class='cn.scau.edu.ssm.movietalk.service.impl.MRealiseDairyServiceImpl'></bean>
+	<bean id="noticeService" class='cn.scau.edu.ssm.movietalk.service.impl.NoticeServiceImpl'></bean>
+	<bean id="commonTool" class='cn.scau.edu.ssm.movietalk.tool.CommonTool'></bean>
 </beans>

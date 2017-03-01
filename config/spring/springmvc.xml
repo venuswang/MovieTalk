@@ -73,6 +73,7 @@
  	<mvc:resources location="/images/" mapping="/images/**"/>
  	<mvc:resources location="/css/" mapping="/css/**"/>
  	<mvc:resources location="/font/" mapping="/font/**"/>
+ 	<mvc:resources location="/fonts/" mapping="/fonts/**"/>
  	<mvc:resources location="/img/" mapping="/img/**"/>
  	
  	<!-- 配置拦截器 -->

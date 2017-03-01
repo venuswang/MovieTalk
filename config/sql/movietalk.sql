@@ -388,4 +388,8 @@ constraint m_realise_dairy_uid foreign key(uid) references m_user(id)
 
 # 初始化数据表
 insert into m_admin(uname,pword,is_super) values ("admin","admin123",1);
-
+INSERT INTO `movietalk`.`m_user` (`id`, `uname`, `realname`, `pword`, `disable`, `sex`, `email`, `score`, `image`, `addtime`, `login_time`, `login_ip`, `status`, `repnum`, `rewrong`) VALUES ('1', 'xiaoming', '小明', '12345678', '0', '1', '1823889319@qq.com', '0', '/pic/default.jpg', '20170206101423', '20170206101423', '192.168.56.1', '0', '0', '0');
+INSERT INTO `movietalk`.`m_user` (`id`, `uname`, `realname`, `pword`, `disable`, `sex`, `email`, `score`, `image`, `addtime`, `login_time`, `login_ip`, `status`, `repnum`, `rewrong`) VALUES ('2', 'xiaohong', '小红', '12345678', '0', '0', '1823889319@qq.com', '1', '/pic/default.jpg', '20170206101423', '20170205101423', '192.168.56.1', '0', '0', '0');
+INSERT INTO `movietalk`.`m_realise_dairy` (`id`, `ip`, `logintime`, `country`, `area`, `region`, `city`, `county`, `isp`, `uid`) VALUES ('1', '192.168.86.1', '20170206101423', '中国', '华南', '广东', '深圳', '深圳', '联通', '1');
+INSERT INTO `movietalk`.`m_realise_dairy` (`id`, `ip`, `logintime`, `country`, `area`, `region`, `city`, `county`, `isp`, `uid`) VALUES ('2', '192.168.56.1', '20170205101423', '中国', '华南', '广东', '汕尾', '陆丰', '电信', '2');
+INSERT INTO `movietalk`.`m_realise_dairy` (`id`, `ip`, `logintime`, `country`, `area`, `region`, `city`, `county`, `isp`, `uid`) VALUES ('3', '192.168.56.1', '20170205151423', '中国', '华南', '广东', '汕尾', '陆丰', '电信', '2');

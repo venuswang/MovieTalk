@@ -44,7 +44,7 @@ public class MyExceptionResolve implements HandlerExceptionResolver {
 		}
 		String message = myException.getMessage();
 		mav.addObject("message", message);
-		mav.setViewName("error");
+		mav.setViewName("501_page");
 		return mav;
 	}
 

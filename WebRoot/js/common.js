@@ -19,7 +19,6 @@ function loginCheck() {
 			"pword": password
 		}
 	}).done(function(res) {
-		debugger;
 		if (res.result) {
 			window.location.href = "admin/admin_index";
 		} else {

@@ -2,24 +2,30 @@ package cn.scau.edu.ssm.movietalk.po;
 
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import cn.scau.edu.ssm.movietalk.validator.ValidGroup1;
+import cn.scau.edu.ssm.movietalk.validator.ValidGroup2;
 
 public class MAdmin {
     private Integer id;
 
-    @NotBlank(message="{madim.uname.null.error}", groups={ValidGroup1.class})
-    @Size(min=1, max=32, message="{madmin.uname.length.error}", groups={ValidGroup1.class})
+    @NotBlank(message="{madmin.uname.null.error}", groups={ValidGroup1.class,ValidGroup2.class})
+    @Size(min=1, max=32, message="{madmin.uname.length.error}", groups={ValidGroup1.class,ValidGroup2.class})
     private String uname;
-
+    
+    @Size(max=50, message="{madmin.fullname.length.error}",groups={ValidGroup2.class})
     private String fullname;
 
+    @Size(min=1, max=64, message="{madmin.email.length.error}",groups={ValidGroup2.class})
+    @Email(message="{madmin.email.format.error}",groups={ValidGroup2.class})
     private String email;
-
+   
+    @Size(max=16, message="{madmin.phone.length.error}",groups={ValidGroup2.class})
     private String phone;
 
-    @NotBlank(message="{madim.pword.null.error}", groups={ValidGroup1.class})
+    @NotBlank(message="{madmin.pword.null.error}", groups={ValidGroup1.class})
     @Size(min=1, max=50, message="{madmin.pword.length.error}", groups={ValidGroup1.class})
     private String pword;
 

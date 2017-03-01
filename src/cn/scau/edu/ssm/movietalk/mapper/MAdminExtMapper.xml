@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.scau.edu.ssm.movietalk.mapper.MAdminExtMapper" >
+  <update id="updateByUnameSelective" parameterType="cn.scau.edu.ssm.movietalk.po.MAdminExtend" >
+    update m_admin
+    <set >
+      <if test="uname != null" >
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="fullname != null" >
+        fullname = #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="pword != null" >
+        pword = #{pword,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null" >
+        login_time = #{loginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="loginIp != null" >
+        login_ip = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="loginmethod != null" >
+        loginmethod = #{loginmethod,jdbcType=BIT},
+      </if>
+      <if test="isSuper != null" >
+        is_super = #{isSuper,jdbcType=BIT},
+      </if>
+    </set>
+    where uname = #{uname,jdbcType=VARCHAR}
+  </update>
+</mapper>

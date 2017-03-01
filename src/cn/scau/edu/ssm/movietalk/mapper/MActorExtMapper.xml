@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.scau.edu.ssm.movietalk.mapper.MActorExtMapper" >
+  
+  <select id="selectByActorName" parameterType="string"  resultType="cn.scau.edu.ssm.movietalk.po.MActorExt" >
+    	select m_actor.*, m_picactor.id picid, m_picactor.picname from m_actor,m_picactor where m_actor.id = m_picactor.aid and (cname like '%${value}%' or ename like '%${value}%') 
+  </select>
+  <select id="selectAll" resultType="cn.scau.edu.ssm.movietalk.po.MActorExt" >
+    	select m_actor.*, m_picactor.id picid, m_picactor.picname from m_actor,m_picactor where m_actor.id = m_picactor.aid
+  </select>
+  <insert id="insertActor" parameterType="cn.scau.edu.ssm.movietalk.po.MActorExt" >
+  	<selectKey keyProperty="id" order="AFTER" resultType="int">
+  		SELECT LAST_INSERT_ID()
+  	</selectKey>
+    insert into m_actor (cname, ename, 
+      sex, constellation, birthday, 
+      bornaddress, profession, addtime
+      )
+    values (#{cname,jdbcType=VARCHAR}, #{ename,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=TINYINT}, #{constellation,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, 
+      #{bornaddress,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, #{addtime,jdbcType=VARCHAR}
+      )
+  </insert>
+</mapper>
