@@ -96,4 +96,7 @@
       </if>
     </trim>
   </insert>
+  <select id="selectByListId" parameterType="int"  resultType="cn.scau.edu.ssm.movietalk.po.MListExt" >
+    	select m_list.*, m_filmpic.picname from m_list,m_filmpic where m_list.id = #{id} and m_list.id = m_filmpic.mid and status = 0 
+  </select>
 </mapper>

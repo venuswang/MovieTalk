@@ -7,4 +7,10 @@
   				(#{mtype.mid}, #{mtype.tid})
   			</foreach>
   	</insert>
+  	<select id="getTypeByMid" resultType="int" parameterType="int">
+  		select tid from m_mtype where mid = #{id}
+  	</select>
+  	<delete id="deleteTypeByMid" parameterType="int">
+  		delete from m_mtype where mid = #{id}
+  	</delete>
 </mapper>

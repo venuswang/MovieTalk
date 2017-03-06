@@ -1,14 +1,34 @@
 package cn.scau.edu.ssm.movietalk.po;
 
+import java.util.List;
+
 public class MListExt extends MList {
 	private String picname;
 	private String actorid;
+	private List<Integer> actorList;
 	private String actorName;
 	private String tagid;
 	private String tagName;
 	private String typeid;
+	private List<Integer> typeList;
 	private String typeName;
 	
+	public List<Integer> getActorList() {
+		return actorList;
+	}
+
+	public void setActorList(List<Integer> actorList) {
+		this.actorList = actorList;
+	}
+
+	public List<Integer> getTypeList() {
+		return typeList;
+	}
+
+	public void setTypeList(List<Integer> typeList) {
+		this.typeList = typeList;
+	}
+
 	public String getActorid() {
 		return actorid;
 	}

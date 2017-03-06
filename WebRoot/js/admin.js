@@ -244,6 +244,57 @@ function actor_edit(elemid) {
 	$("#actorEditModal").modal("show");
 }
 
+function list_edit(elemid) {
+	var id = elemid.parentNode.parentNode.children[0].innerText;
+	var url = "admin/edit_list_query";
+	$.ajax({
+		url : url,
+		type : 'POST',
+		data : {
+			"id": id,
+		}
+	}).done(function(data) {
+		//初始化数据
+//		$("#edit_actorid").val(null).trigger();
+//		document.getElementById("#edit_actorid").options.length = 0
+		var arr = $("#edit_actorid").select2("data", null, true);
+		for(var t = 0; t < arr.length; t++) {
+			arr[t].selected = false;
+		}
+		$("#edit_actorid").val(null).trigger("change");
+		
+		var arr1 = $("#edit_typeid").select2("data", null, true);
+		for(var t = 0; t < arr1.length; t++) {
+			arr1[t].selected = false;
+		}
+		$("#edit_typeid").val(null).trigger("change");
+		$("#edit_id").val(data.id);
+		$("#edit_filname").val(data.filname);
+		$("#edit_picname").val(data.picname);
+		$("#edit_petname").val(data.petname);
+		$("#edit_director").val(data.director);
+		$("#edit_editor").val(data.editor);
+		$("#edit_nation").val(data.nation);
+		$("#edit_voice").val(data.voice);
+		$("#edit_showtime").val(data.showtime);
+		$("#edit_duration").val(data.duration);
+		$("#edit_rate").val(data.rate);
+		$("#edit_content").val(data.content);
+		$("#edit_picimg").attr("src", "/pic/" + data.picname);
+		$("#edit_tagid").select2("val", data.tagid);
+//		$("#edit_typeid").empty();
+		for(var i = 0; i < data.actorList.length; i++) {
+			$("#edit_actorid").select2("val", data.actorList[i].toString(), true);
+		}
+		for(var j = 0; j < data.typeList.length; j++) {
+			$("#edit_typeid").select2("val", data.typeList[j].toString())
+		}
+		$("#edit_actorid").val(data.actorList).trigger("change");
+		$("#edit_typeid").val(data.typeList).trigger("change");
+		$("#listEditModal").modal("show");
+	});
+}
+
 function admin_tag_edit_save() {
 	var id = $('#tag_edit_id').val();
 	var name = $('#tag_edit_name').val();
@@ -365,6 +416,41 @@ function actor_delete(elemid) {
     }*/
 }
 
+function list_delete(elemid) {
+	var id = elemid.parentNode.parentNode.children[0].innerText;
+	var d = dialog({
+        width: 260,
+        title: '提示',
+        content: '你确定要删除该条记录吗？',
+        okValue: '确定',
+        ok: function() {
+        	var url = "admin/del_list_save";
+    		$.ajax({
+    			url : url,
+    			type : 'POST',
+    			data : {
+    				"id": id
+    			}
+    		}).done(function(res) {
+    			if (res.result) {
+    				var filterParam = $("#list_name").val();
+    				window.location.href = "admin/admin_list/1/10?list_name=" + filterParam;
+    			} else {
+    				alert(res.message);
+    			}
+    		});
+        },
+        cancelValue: '取消',
+        cancel: function() {
+        	
+        },
+        onshow: function() {
+           
+        },
+    });
+    d.show();
+}
+
 function admin_tag_del_save() {
 	var id = $('#tag_del_id').val();
 	var name = $('#tag_del_name').val();
@@ -435,15 +521,3 @@ function getObjectURL(file) {
 	}
 	return url ;
 }
-
-$(".form_datetime").datetimepicker({
-	language:  'zh-TW',
-    format: "yyyymmdd",
-    weekStart: 1,//一周从哪一天开始。0（星期日）到6（星期六）
-    todayBtn: true,
-    autoclose: true,//当选择一个日期之后是否立即关闭此日期时间选择器。
-    startView: 2,
-    minView: 2,
-    forceParse: false,
-    todayHighlight: true,//高亮当前日期
-});

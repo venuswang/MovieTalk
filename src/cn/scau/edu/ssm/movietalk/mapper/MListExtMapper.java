@@ -8,4 +8,5 @@ public interface MListExtMapper {
     public List<MListExt> selectByListName(String listName);
     public List<MListExt> selectAll();
     public int insertSelectiveExt(MListExt mlist);
+    public MListExt selectByListId(int id);
 }

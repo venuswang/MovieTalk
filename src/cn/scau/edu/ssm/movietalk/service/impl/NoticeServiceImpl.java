@@ -1,5 +1,7 @@
 package cn.scau.edu.ssm.movietalk.service.impl;
 
-public class NoticeServiceImpl {
+import cn.scau.edu.ssm.movietalk.service.NoticeService;
+
+public class NoticeServiceImpl implements NoticeService {
 
 }

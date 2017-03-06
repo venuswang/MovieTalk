@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.scau.edu.ssm.movietalk.mapper.MMtagExtMapper" >
+  	<select id="getTagByMid" parameterType="int" resultType="int">
+  		select tagid from m_mtag where mid = #{id}
+  	</select>
+  	<update id="updateTagByMid" parameterType="cn.scau.edu.ssm.movietalk.po.MMtag">
+  		update m_mtag set tagid = #{tagid} where mid = #{mid}
+  	</update>
+  	<delete id="deleteTagByMid" parameterType="int">
+  		delete from m_mtag where mid = #{id}
+  	</delete>
+</mapper>

@@ -427,7 +427,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="./js/dialog-min.js"></script>
     <!-- 包括所有kendoui的js插件或者可以根据需要使用的js插件调用　-->
     <script src="./js/kendo.all.min.js"></script>
-    <script src="./js/admin.js"></script>                         
+    <script src="./js/admin.js"></script>  
+    <script src="./js/datetime.js"></script>                         
     </script>         
   </body>
 </html>

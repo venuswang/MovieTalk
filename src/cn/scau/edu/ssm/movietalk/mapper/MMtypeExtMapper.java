@@ -7,4 +7,6 @@ import org.apache.ibatis.annotations.Param;
 
 public interface MMtypeExtMapper {
     public int insertBatch(List<MMtype> mtype);
+    public List<Integer> getTypeByMid(int mid);
+    public int deleteTypeByMid(int mid);
 }

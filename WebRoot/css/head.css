@@ -1,0 +1,15 @@
+.head-font-size{
+	font-size: x-large;
+    color: cadetblue;
+}
+.head-input-size {
+	margin-top: 4px;
+	height: 30px;
+}
+.head-search-size {
+	margin-top: 4px;
+    margin-left: -60px;
+}
+.head-img-size {
+	margin-top: 30px;
+}

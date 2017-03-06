@@ -10,6 +10,7 @@ import cn.scau.edu.ssm.movietalk.mapper.MListExtMapper;
 import cn.scau.edu.ssm.movietalk.mapper.MListMapper;
 import cn.scau.edu.ssm.movietalk.mapper.MMactorExtMapper;
 import cn.scau.edu.ssm.movietalk.mapper.MMactorMapper;
+import cn.scau.edu.ssm.movietalk.mapper.MMtagExtMapper;
 import cn.scau.edu.ssm.movietalk.mapper.MMtagMapper;
 import cn.scau.edu.ssm.movietalk.mapper.MMtypeExtMapper;
 import cn.scau.edu.ssm.movietalk.mapper.MMtypeMapper;
@@ -42,6 +43,8 @@ public class MListServiceImpl implements MListService {
 	private MMtypeExtMapper mMtypeExtMapper;
 	@Autowired
 	private MMtagMapper mMtagMapper;
+	@Autowired
+	private MMtagExtMapper mMtagExtMapper;
 	@Autowired
 	private MFilmpicMapper mFilmpicMapper;
 	
@@ -83,6 +86,65 @@ public class MListServiceImpl implements MListService {
 	@Override
 	public void insertfilActor(List<MMactor> filmActor) throws Exception {
 		mMactorExtMapper.insertBatch(filmActor);
+	}
+
+	@Override
+	public MListExt queryList(Integer listId) throws Exception {
+		// 获取基本资料
+		MListExt list = mListExtMapper.selectByListId(listId);
+		// 获取标签
+		list.setTagid(String.valueOf(mMtagExtMapper.getTagByMid(listId)));
+		// 获取类型
+		list.setTypeList(mMtypeExtMapper.getTypeByMid(listId));
+		// 获取演员
+		list.setActorList(mMactorExtMapper.getActorByMid(listId));
+		return list;
+	}
+
+	@Override
+	public void updateMlist(MListExt mlist) throws Exception {
+		mListMapper.updateByPrimaryKeySelective(mlist);
+	}
+
+	@Override
+	public void updateFilTag(MMtag filmTag) throws Exception {
+		mMtagExtMapper.updateTagByMid(filmTag);
+	}
+
+	@Override
+	public void updateFilType(List<MMtype> filmType) throws Exception {
+		if(filmType != null && filmType.size() > 0) {
+			int mid = filmType.get(0).getMid();
+			mMtypeExtMapper.deleteTypeByMid(mid);
+			mMtypeExtMapper.insertBatch(filmType);
+		}
+	}
+
+	@Override
+	public void updatefilActor(List<MMactor> filmActor) throws Exception {
+		if(filmActor != null && filmActor.size() > 0) {
+			int mid = filmActor.get(0).getMid();
+			mMactorExtMapper.deleteActorByMid(mid);
+			mMactorExtMapper.insertBatch(filmActor);
+		}
+	}
+
+	@Override
+	public void deleteList(int mid) throws Exception {
+		
+		// 删除电影图片
+		cn.scau.edu.ssm.movietalk.po.MFilmpicExample example = new cn.scau.edu.ssm.movietalk.po.MFilmpicExample();
+		cn.scau.edu.ssm.movietalk.po.MFilmpicExample.Criteria criteria = example.createCriteria();
+		criteria.andMidEqualTo(mid);
+		mFilmpicMapper.deleteByExample(example);
+		// 删除电影标签
+		mMtagExtMapper.deleteTagByMid(mid);
+		// 删除电影类型
+		mMtypeExtMapper.deleteTypeByMid(mid);
+		// 删除电影演员
+		mMactorExtMapper.deleteActorByMid(mid);
+		// 删除电影
+		mListMapper.deleteByPrimaryKey(mid);
 	}
 
 }

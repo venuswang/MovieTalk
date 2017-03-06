@@ -32,7 +32,9 @@ import cn.scau.edu.ssm.movietalk.po.MAdminExtend;
 import cn.scau.edu.ssm.movietalk.po.MFilmpic;
 import cn.scau.edu.ssm.movietalk.po.MListExt;
 import cn.scau.edu.ssm.movietalk.po.MListVO;
+import cn.scau.edu.ssm.movietalk.po.MMactor;
 import cn.scau.edu.ssm.movietalk.po.MMtag;
+import cn.scau.edu.ssm.movietalk.po.MMtype;
 import cn.scau.edu.ssm.movietalk.po.MPicactor;
 import cn.scau.edu.ssm.movietalk.po.MTag;
 import cn.scau.edu.ssm.movietalk.po.MType;
@@ -298,11 +300,39 @@ public class ManagerController {
 		filtag.setTagid(new Integer(mListExt.getTagid()));
 		mListService.insertFilTag(filtag);
 		//添加影片演员
-		
+		String filids = mListExt.getActorid();
+		if(filids.length() > 1) {
+			filids = filids.substring(1);
+			String[] actorids = filids.split(",");
+			List<MMactor> mactor = new ArrayList<MMactor>();
+			for(String actorid : actorids) {
+				if(actorid.trim().equals("")) {
+					continue;
+				}
+				MMactor actor = new MMactor();
+				actor.setMid(listId);
+				actor.setAid(new Integer(actorid));
+				mactor.add(actor);
+			}
+			mListService.insertfilActor(mactor);
+		}
 		//添加影片类型
-		
-		
-		
+		String typeids = mListExt.getTypeid();
+		if(typeids.length() > 1) {
+			typeids = typeids.substring(1);
+			String[] filTypes = typeids.split(",");
+			List<MMtype> mtype = new ArrayList<MMtype>();
+			for(String typeid : filTypes) {
+				if(typeid.trim().equals("")) {
+					continue;
+				}
+				MMtype type = new MMtype();
+				type.setMid(listId);
+				type.setTid(new Integer(typeid));
+				mtype.add(type);
+			}
+			mListService.insertFilType(mtype);
+		}
 		return "forward:admin_list/1/10";
 	}
 	
@@ -392,6 +422,74 @@ public class ManagerController {
 		return "redirect:admin_actor/1/10";
 	}
 	
+	@RequestMapping(value="/list_edit_save", method={RequestMethod.POST})
+	public String list_edit_save(MListExt listExt, @RequestParam(value="picfile",required=true) MultipartFile pic) throws Exception {
+		// 更新图片
+		if(pic != null && pic.getOriginalFilename() != null && pic.getOriginalFilename().length() > 0) 
+		{
+			String pic_name = "";
+			String path = "E:/picture/";
+			String pic_oriname = pic.getOriginalFilename();
+			int index = pic_oriname.lastIndexOf(".");
+			if(index == -1)
+			{
+				pic_name = "default.jpg";
+			} else{
+				pic_name = listExt.getPicname();
+				File file = new File(path+pic_name);
+				if(!file.exists())
+				{
+					file.createNewFile();
+				}
+				pic.transferTo(file);
+			}
+		}
+		// 更新影片基本内容(update)
+		mListService.updateMlist(listExt);
+		// 更新影片标签(update)
+		MMtag filmTag = new MMtag();
+		filmTag.setMid(listExt.getId());
+		filmTag.setTagid(new Integer(listExt.getTagid()));
+		mListService.updateFilTag(filmTag);
+		// 更新影片演员(delete insert)
+		String filids = listExt.getActorid();
+		if(filids.length() >= 1) {
+			if(filids.startsWith(","))
+				filids = filids.substring(1);
+			String[] actorids = filids.split(",");
+			List<MMactor> mactor = new ArrayList<MMactor>();
+			for(String actorid : actorids) {
+				if(actorid.trim().equals("")) {
+					continue;
+				}
+				MMactor actor = new MMactor();
+				actor.setMid(listExt.getId());
+				actor.setAid(new Integer(actorid));
+				mactor.add(actor);
+			}
+			mListService.updatefilActor(mactor);
+		}
+		// 更新影片类型(delete insert)
+		String typeids = listExt.getTypeid();
+		if(typeids.length() >= 1) {
+			if(typeids.startsWith(","))
+				typeids = typeids.substring(1);
+			String[] filTypes = typeids.split(",");
+			List<MMtype> mtype = new ArrayList<MMtype>();
+			for(String typeid : filTypes) {
+				if(typeid.trim().equals("")) {
+					continue;
+				}
+				MMtype type = new MMtype();
+				type.setMid(listExt.getId());
+				type.setTid(new Integer(typeid));
+				mtype.add(type);
+			}
+			mListService.updateFilType(mtype);
+		}
+		return "redirect:admin_list/1/10";
+	}
+	
 	@RequestMapping(value="/del_tag_save",method={RequestMethod.POST})
 	public @ResponseBody MyResult del_tag_save(@Validated(value={ValidGroup4.class}) MTag mTag, BindingResult result) throws Exception {
 		if(result.hasErrors())
@@ -439,6 +537,15 @@ public class ManagerController {
 		return result;
 	}
 	
+	@RequestMapping(value="/del_list_save",method={RequestMethod.POST})
+	public @ResponseBody MyResult del_list_save(@RequestParam(required=true) int id) throws Exception {
+		mListService.deleteList(id);
+		MyResult result = new MyResult();
+		result.setResult(true);
+		result.setMessage("删除成功");
+		return result;
+	}
+	
 	@RequestMapping(value="/query_all_actor",method={RequestMethod.POST, RequestMethod.GET})
 	public  @ResponseBody List<Map> query_all_actor() throws Exception {
 		return mAdminService.query_all_actor();
@@ -462,6 +569,11 @@ public class ManagerController {
 		map.put("sex", sex_lists);
 		map.put("isp", isp_lists);
 		return map;
+	}
+	
+	@RequestMapping(value="/edit_list_query", method={RequestMethod.POST})
+	public @ResponseBody MListExt edit_list_query(@RequestParam(value="id",required=true) int listid) throws Exception {
+		return mListService.queryList(listid);
 	}
 	
 }

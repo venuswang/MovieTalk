@@ -197,7 +197,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     				${mlist.director}
                                     			</td>
                                     			<td>
-                                    				$(mlist.editor)
+                                    				${mlist.editor}
                                     			</td>
                                     			<td>
                                     				${mlist.nation}
@@ -338,62 +338,74 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
   </div>
 </div>
-<div class="modal fade" id="actorEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+
+<div class="modal fade" id="listEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="exampleModalLabel1">编辑影片演员</h4>
+        <h4 class="modal-title" id="exampleModalLabel1">编辑影片</h4>
       </div>
-      <form name="form" method="post" enctype="multipart/form-data" action="admin/actor_edit_save">
+      <form name="form" method="post" enctype="multipart/form-data" action="admin/list_edit_save">
 	      <div class="modal-body">
 	          <div class="form-group">
-	            <label for="recipient-name" class="control-label">中文名:</label><br />
-	            <input type="text" class="form-control" id="edit_cname" name="cname">
+	            <label for="recipient-name" class="control-label">影名:</label><br />
+	            <input type="text" class="form-control" id="edit_filname" name="filname">
+	            <input type="hidden" id="edit_picname" name="picname">
 	            <input type="hidden" id="edit_id" name="id">
-	            <input type="hidden" id="edit_picname" name="picName">
 	          </div>
 	          <div class="form-group">
-	            <label for="recipient-name" class="control-label">英文名:</label><br />
-	            <input type="text" class="form-control" id="edit_ename" name="ename">
+	            <label for="recipient-name" class="control-label">别名:</label><br />
+	            <input type="text" class="form-control" id="edit_petname" name="petname">
 	          </div>
 	          <div class="form-group">
-	            <label for="recipient-name" class="control-label">性别:</label><br />
-	            <select id="edit_sex" name="sex" class="form-control"> 
-					<option value="2">不详</option> 
-					<option value="1">女</option> 
-					<option value="0">男</option> 
-				</select>
+	            <label for="recipient-name" class="control-label">导演:</label><br />
+    			<input type="text" class="form-control" id="edit_director" name="director">
 	          </div>
 	          <div class="form-group">
-	            <label for="recipient-name" class="control-label">星座:</label><br />
-	            <select id="edit_constellation" name="constellation" class="form-control">
-		            <option value="白羊座">白羊座</option> 
-					<option value="金牛座">金牛座</option> 
-					<option value="双子座">双子座</option>
-					<option value="巨蟹座">巨蟹座</option> 
-					<option value="狮子座" >狮子座</option> 
-					<option value="处女座">处女座</option>
-		            <option value="天秤座">天秤座</option> 
-					<option value="天蝎座">天蝎座</option> 
-					<option value="射手座">射手座</option>
-					<option value="摩羯座">摩羯座</option> 
-					<option value="水瓶座">水瓶座</option> 
-					<option value="双鱼座">双鱼座</option>
-				</select>
+	            <label for="recipient-name" class="control-label">编剧:</label><br />
+	            <input type="text" class="form-control" id="edit_editor" name="editor">
+	          </div>
+	          
+	          <div class="form-group">
+	            <label for="recipient-name" class="control-label">制片国家:</label><br />
+	            <input type="text" class="form-control" id="edit_nation" name="nation">
 	          </div>
 	          <div class="form-group">
-	            <label for="recipient-name" class="control-label">出生年月日(格式:yyyyMMDD):</label>
-    			<input type="text" class="form-control form_datetime" id="edit_birthday" name="birthday">
+	            <label for="recipient-name" class="control-label">语言:</label><br />
+	            <input type="text" class="form-control" id="edit_voice" name="voice">
 	          </div>
 	          <div class="form-group">
-	            <label for="recipient-name" class="control-label">出生地:</label><br />
-	            <input type="text" class="form-control" id="edit_bornaddress" name="bornaddress">
+	            <label for="recipient-name" class="control-label">上映时间:</label><br />
+	            <input type="text" class="form-control form_datetime" id="edit_showtime" name="showtime">
 	          </div>
 	          <div class="form-group">
-	            <label for="recipient-name" class="control-label">职业:</label><br />
-	            <input type="text" class="form-control" id="edit_profession" name="profession">
+	            <label for="recipient-name" class="control-label">片长(分钟):</label><br />
+	            <input type="number" min=1 class="form-control" id="edit_duration" name="duration">
 	          </div>
+	          <div class="form-group">
+	            <label for="recipient-name" class="control-label">评分:</label><br />
+	            <input type="number" min=0 max=10 class="form-control" id="edit_rate" name="rate">
+	          </div>
+	          <div class="form-group">
+	            <label for="recipient-name" class="control-label">演员:</label><br />
+	            <input type="hidden" class="form-control" id="edit_actorid" name="actorid">
+	          </div>
+	          <div class="form-group">
+	            <label for="recipient-name" class="control-label">影片标签:</label><br />
+	            <div id="tag_select_edit" style="width:511px">
+	            	<input type="hidden" class="form-control select2_box" id="edit_tagid" name="tagid"></input>
+	            </div>
+	          </div>
+	          <div class="form-group">
+	            <label for="recipient-name" class="control-label">影片类型:</label><br />
+	            <input type="hidden" class="form-control" id="edit_typeid" name="typeid">
+	          </div>
+	          <div class="form-group">
+	            <label for="recipient-name" class="control-label">简介:</label><br />
+	            <textarea class="form-control" id="edit_content" name="content"></textarea>
+	          </div>
+	          
 	          <div class="form-group">
 	            <label for="recipient-name" class="control-label">图像:</label><br />
 	            <input type="file" class="form-control" name="picfile" id="edit_picfile" />
@@ -411,6 +423,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
   </div>
 </div>
+
         <!-- /#page-wrapper -->
 		<!-- end -->
 	<!-- 如果要使用Bootstrap的js插件，必须先调入jQuery -->
@@ -426,6 +439,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="./js/kendo.all.min.js"></script>
     <script src="./js/admin.js"></script>                         
     <script src="./js/admin_list.js"></script>                         
+    <script src="./js/datetime.js"></script>                         
     </script>         
   </body>
 </html>

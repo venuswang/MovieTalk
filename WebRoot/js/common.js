@@ -29,3 +29,7 @@ function loginCheck() {
 	});
 
 }
+
+$("#login").bind('click', function () {
+    alert("hello");
+});

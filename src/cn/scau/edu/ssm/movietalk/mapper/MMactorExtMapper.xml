@@ -7,4 +7,10 @@
   				(#{mactor.mid}, #{mactor.aid})
   			</foreach>
   	</insert>
+  	<select id="getActorByMid" resultType="int" parameterType="int">
+  		select aid from m_mactor where mid = #{id}
+  	</select>
+  	<delete id="deleteActorByMid" parameterType="int">
+  		delete from m_mactor where mid = #{id}
+  	</delete>
 </mapper>

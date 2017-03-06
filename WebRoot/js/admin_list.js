@@ -13,6 +13,11 @@ $.ajax({
 				placeholder: "请选择影片标签",
 				data: data
 			});
+			$("#tag_select_edit .select2_box").select2({
+			    width: 511,
+				placeholder: "请选择影片标签",
+				data: data
+			});
 		});
 
 $.ajax({
@@ -25,6 +30,12 @@ $.ajax({
 		placeholder: "请选择影片演员",
 		data: data
 	});
+	$('#edit_actorid').select2({
+		width: 511,
+		multiple: true,
+		placeholder: "请选择影片演员",
+		data: data
+	});
 });
 
 $.ajax({
@@ -32,6 +43,12 @@ $.ajax({
 	type : 'POST',
 }).done(function(data) {
 	$('#typeid').select2({
+		width: 511,
+		multiple: true,
+		placeholder: "请选择影片类型",
+		data: data
+	});
+	$('#edit_typeid').select2({
 		width: 511,
 		multiple: true,
 		placeholder: "请选择影片类型",

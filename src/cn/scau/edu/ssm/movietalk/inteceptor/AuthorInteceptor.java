@@ -55,7 +55,7 @@ public class AuthorInteceptor implements HandlerInterceptor {
 			if(username != null && username.length() > 0) {
 				return true;
 			} else {
-				request.getRequestDispatcher("customer").forward(request, response);
+				request.getRequestDispatcher("/jsp/customer.jsp").forward(request, response);
 			}
 		}
 		return true;
