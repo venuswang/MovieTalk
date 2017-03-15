@@ -30,6 +30,18 @@ function loginCheck() {
 
 }
 
-$("#login").bind('click', function () {
-    alert("hello");
-});
+function login_click() {
+	$("#loginModal").modal("show");
+}
+
+function login_save() {
+	alert("jh")
+}
+
+function regist_click() {
+	$("#registModal").modal("show");
+}
+
+function regist_save() {
+	alert("dd")
+}

@@ -10,15 +10,18 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.scau.edu.ssm.movietalk.exception.MyException;
 import cn.scau.edu.ssm.movietalk.po.MAdminExtend;
+import cn.scau.edu.ssm.movietalk.po.MListVO;
 import cn.scau.edu.ssm.movietalk.po.MyResult;
 import cn.scau.edu.ssm.movietalk.service.MAdminService;
 import cn.scau.edu.ssm.movietalk.validator.ValidGroup1;
@@ -40,6 +43,11 @@ public class CommonController {
 	@RequestMapping(value="/manager",method={RequestMethod.GET,RequestMethod.POST})
 	public String manager() throws Exception{
 		return "admin";
+	}
+	
+	@RequestMapping(value="/index",method={RequestMethod.GET,RequestMethod.POST})
+	public void index(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 	
 	/**
@@ -101,5 +109,12 @@ public class CommonController {
 	    	throw new MyException("中转出错");
 	    }
 	    return result;
+	}
+	
+	@RequestMapping(value="/query_all_film/{list_page}/{list_size}",method={RequestMethod.POST})
+	public @ResponseBody MListVO query_all_film(@PathVariable("list_page") int page, @PathVariable("list_size") int size, HttpServletRequest request) throws Exception {
+		String listName = request.getParameter("list_name");
+		MListVO listVO = mAdminService.queryList(page, size, listName);
+		return listVO;
 	}
 }

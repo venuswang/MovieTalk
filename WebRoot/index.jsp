@@ -17,10 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	<script src="js/application.js" type="text/javascript"></script>
-	-->
+	<link rel="stylesheet" type="text/css" href="css/opentip.css">
   </head>
   
   <body>
@@ -28,83 +25,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	 <div class="row">
       <div class="col-lg-12">
           <div class="panel panel-default">
-              <div class="bootstrap-admin-panel-content">
-                  <div class="row bootstrap-admin-light-padding-bottom">
-                  	  <div class="col-md-3 head-img-size">
-                  	  
-                  	  </div>
-                      <div class="col-md-2 head-img-size">
-                          <a href="javascript:;" class="thumbnail">
-                              <img src="images/260-180.png">
-                          </a>
-                      </div>
-                      <div class="col-md-2 head-img-size">
-                          <a href="javascript:;" class="thumbnail">
-                              <img src="images/260-180.png">
-                          </a>
-                      </div>
-                      <div class="col-md-2 head-img-size">
-                          <a href="javascript:;" class="thumbnail">
-                              <img src="images/260-180.png">
-                          </a>
-                      </div>
-                  </div> 
-                  <div class="row bootstrap-admin-light-padding-bottom">
-                  	  <div class="col-md-3 head-img-size">
-                  	  
-                  	  </div>
-                      <div class="col-md-2 head-img-size">
-                          <a href="javascript:;" class="thumbnail">
-                              <img src="images/260-180.png">
-                          </a>
-                      </div>
-                      <div class="col-md-2 head-img-size">
-                          <a href="javascript:;" class="thumbnail">
-                              <img src="images/260-180.png">
-                          </a>
-                      </div>
-                      <div class="col-md-2 head-img-size">
-                          <a href="javascript:;" class="thumbnail">
-                              <img src="images/260-180.png">
-                          </a>
-                      </div>
-                  </div> 
-                  <div class="row bootstrap-admin-light-padding-bottom">
-                  	  <div class="col-md-3 head-img-size">
-                  	  
-                  	  </div>
-                      <div class="col-md-2 head-img-size">
-                          <a href="javascript:;" class="thumbnail">
-                              <img src="images/260-180.png">
-                          </a>
-                      </div>
-                      <div class="col-md-2 head-img-size">
-                          <a href="javascript:;" class="thumbnail">
-                              <img src="images/260-180.png">
-                          </a>
-                      </div>
-                      <div class="col-md-2 head-img-size">
-                          <a href="javascript:;" class="thumbnail">
-                              <img src="images/260-180.png">
-                          </a>
-                      </div>
-                  </div> 
+              <div class="bootstrap-admin-panel-content" id="div-content">
+                 	
               </div>
-              <div class="panel-footer">
-                     <!-- start -->
- 						共有100条，每页显示：10条
- 				<div class="pull-right">
-				  <ul class="list-inline">
-		    			<li class="disabled"><a>«</a></li>
-		    			<li ><a>1</a></li>
-		    			<li class="disabled"><a>»</a></li>
-		    	 </ul>	
- 					</div>
- 				<!-- end -->          
+              <div class="panel-footer" id="div-footer">
+                         
               </div>   
           </div>
       </div>
   </div>
 
   </body>
+  <script src="js/opentip-jquery.min.js" type="text/javascript"></script>
+  <script src="js/user-index.js" type="text/javascript"></script>
 </html>
