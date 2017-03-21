@@ -12,7 +12,16 @@ public class MListExt extends MList {
 	private String typeid;
 	private List<Integer> typeList;
 	private String typeName;
+	private boolean iscollect;
 	
+	public boolean isIscollect() {
+		return iscollect;
+	}
+
+	public void setIscollect(boolean iscollect) {
+		this.iscollect = iscollect;
+	}
+
 	public List<Integer> getActorList() {
 		return actorList;
 	}

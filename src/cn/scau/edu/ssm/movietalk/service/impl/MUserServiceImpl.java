@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.scau.edu.ssm.movietalk.mapper.MUserMapper;
 import cn.scau.edu.ssm.movietalk.mapper.MUserMapperExt;
+import cn.scau.edu.ssm.movietalk.po.MUser;
 import cn.scau.edu.ssm.movietalk.po.MUserExample;
 import cn.scau.edu.ssm.movietalk.po.MUserExample.Criteria;
 import cn.scau.edu.ssm.movietalk.service.MUserService;
@@ -64,6 +65,35 @@ public class MUserServiceImpl implements MUserService {
 			sexList.add(chartMap);
 		}	
 		return sexList;
+	}
+
+	@Override
+	public int selectUid(MUser user) throws Exception {
+		Integer uid = mUserMapperExt.selectUid(user);
+		if(uid == null) {
+			return -1;
+		}
+		return uid;
+	}
+
+	@Override
+	public int insertUid(MUser user) throws Exception {
+		mUserMapperExt.insertUid(user);
+		return user.getId();
+	}
+
+	@Override
+	public int updateUid(MUser user) throws Exception {
+		return mUserMapper.updateByPrimaryKeySelective(user);
+	}
+
+	@Override
+	public int checkUser(String uname) throws Exception {
+		MUserExample example = new MUserExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andUnameEqualTo(uname).andStatusEqualTo(false);
+		int count = mUserMapper.countByExample(example);
+		return count;
 	}
 
 }

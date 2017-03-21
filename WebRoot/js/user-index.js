@@ -3,11 +3,14 @@
  */
 
 function query_all_films(currentPage) {
+	var film_name = $("#film_name").val();
 	$.ajax({
 		url : "common/query_all_film/" + currentPage + "/10",
 		type : 'POST',
+		data: {
+			"list_name": film_name
+		}
 	}).done(function(data) {
-		debugger;
 		var div_content = document.getElementById("div-content");
 		var div_footer = document.getElementById("div-footer");
 		div_content.innerHTML = "";
@@ -21,7 +24,7 @@ function query_all_films(currentPage) {
 			// content start
 			var content_html_start = "";
 			var common_start = "<div class=\"row bootstrap-admin-light-padding-bottom\"><div class=\"col-md-3 head-img-size\"></div>";
-			for(var index = 0; index < data.count; index++) {
+			for(var index = 0; index < data.mList.length; index++) {
 				if(index % 3 == 0) {
 					content_html_start += common_start;
 				}
@@ -68,3 +71,7 @@ function query_all_films(currentPage) {
 	});
 }
 query_all_films(1);
+// 用于测试
+function test() {
+	debugger;
+}

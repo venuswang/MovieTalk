@@ -9,11 +9,15 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.scau.edu.ssm.movietalk.mapper.MRealiseDairyExtMapper;
+import cn.scau.edu.ssm.movietalk.mapper.MRealiseDairyMapper;
+import cn.scau.edu.ssm.movietalk.po.MRealiseDairy;
 import cn.scau.edu.ssm.movietalk.service.MRealiseDairyService;
 
 public class MRealiseDairyServiceImpl implements MRealiseDairyService {
 	@Autowired
 	private MRealiseDairyExtMapper mRealiseDairyExtMapper;
+	@Autowired
+	private MRealiseDairyMapper mRealiseDairyMapper;
 	
 	@Override
 	public List<Map<String, Object>> selectIsp() throws Exception {
@@ -38,6 +42,11 @@ public class MRealiseDairyServiceImpl implements MRealiseDairyService {
 			ispList.add(chartMap);
 		}
 		return ispList;
+	}
+
+	@Override
+	public int insertIsp(MRealiseDairy dairy) throws Exception {
+		return mRealiseDairyMapper.insertSelective(dairy);
 	}
 
 }

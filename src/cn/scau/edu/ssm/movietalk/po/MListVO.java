@@ -7,7 +7,22 @@ public class MListVO {
 	private int count;
 	private int page;
 	private String filterParam;
+	private int tagid;
+	private int typeid;
 	private List<MListExt> mList;
+	
+	public int getTagid() {
+		return tagid;
+	}
+	public void setTagid(int tagid) {
+		this.tagid = tagid;
+	}
+	public int getTypeid() {
+		return typeid;
+	}
+	public void setTypeid(int typeid) {
+		this.typeid = typeid;
+	}
 	public int getPageCount() {
 		return pageCount;
 	}

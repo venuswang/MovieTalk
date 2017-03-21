@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.scau.edu.ssm.movietalk.mapper.MShortReviewExtMapper" >
+  <select id="selectByMid" parameterType="int"  resultType="cn.scau.edu.ssm.movietalk.po.MShortReviewExt" >
+    	select m_short_review.*,m_user.uname as uname from m_short_review,m_user where mid = #{id} and m_short_review.uid = m_user.id order by m_short_review.usenum desc, m_short_review.rtime desc
+  </select>
+  <update id="addSuppose" parameterType="int" >
+  		update m_short_review set usenum = usenum + 1 where id = #{id}
+  </update>
+  <update id="cancelSuppose" parameterType="int" >
+  		update m_short_review set usenum = usenum - 1 where id = #{id}
+  </update>
+</mapper>

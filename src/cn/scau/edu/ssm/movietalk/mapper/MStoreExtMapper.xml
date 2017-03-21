@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.scau.edu.ssm.movietalk.mapper.MStoreExtMapper" >
+ 	<select id="selectALLByUid" parameterType="int" resultType="cn.scau.edu.ssm.movietalk.po.MStoreExt">
+ 		select m_store.*,m_list.filname as filname from m_store,m_list where m_store.mid = m_list.id and m_store.uid = #{id}
+ 	</select>
+</mapper>

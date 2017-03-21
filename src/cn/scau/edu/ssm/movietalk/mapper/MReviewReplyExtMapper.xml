@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.scau.edu.ssm.movietalk.mapper.MReviewReplyExtMapper" >
+  	<select id="selectByLid" parameterType="int" resultType="cn.scau.edu.ssm.movietalk.po.MReviewReplyExt">
+  		select m_review_reply.*,m_user.uname as uname from m_review_reply,m_user where m_review_reply.uid = m_user.id and lid = #{id} order by m_review_reply.rtime desc
+  	</select>
+</mapper>

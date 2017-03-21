@@ -22,6 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   	<%@include file="jsp/head.jsp" %>
+  	<%@include file="jsp/head_center.jsp" %>
   	 <div class="row">
       <div class="col-lg-12">
           <div class="panel panel-default">

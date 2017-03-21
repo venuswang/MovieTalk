@@ -147,4 +147,11 @@ public class MListServiceImpl implements MListService {
 		mListMapper.deleteByPrimaryKey(mid);
 	}
 
+	@Override
+	public MListExt queryUserList(Integer listId) throws Exception {
+		// 获取基本资料
+		MListExt list = mListExtMapper.selectByListId(listId);
+		return list;
+	}
+
 }

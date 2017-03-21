@@ -4,4 +4,107 @@
 	<select id="selectSex" resultType="int">
 		select sex from m_user
 	</select>
+	<select id="selectUid" resultType="int" parameterType="cn.scau.edu.ssm.movietalk.po.MUser">
+		select id from m_user where uname = #{uname} and pword = #{pword} and status = 0
+	</select>
+	<insert id="insertUid" parameterType="cn.scau.edu.ssm.movietalk.po.MUser" >
+	<selectKey keyProperty="id" order="AFTER" resultType="int">
+  		SELECT LAST_INSERT_ID()
+  	</selectKey>
+    insert into m_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uname != null" >
+        uname,
+      </if>
+      <if test="realname != null" >
+        realname,
+      </if>
+      <if test="pword != null" >
+        pword,
+      </if>
+      <if test="disable != null" >
+        disable,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="addtime != null" >
+        addtime,
+      </if>
+      <if test="loginTime != null" >
+        login_time,
+      </if>
+      <if test="loginIp != null" >
+        login_ip,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="repnum != null" >
+        repnum,
+      </if>
+      <if test="rewrong != null" >
+        rewrong,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uname != null" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="pword != null" >
+        #{pword,jdbcType=VARCHAR},
+      </if>
+      <if test="disable != null" >
+        #{disable,jdbcType=BIT},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null" >
+        #{loginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="loginIp != null" >
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="repnum != null" >
+        #{repnum,jdbcType=INTEGER},
+      </if>
+      <if test="rewrong != null" >
+        #{rewrong,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
 </mapper>

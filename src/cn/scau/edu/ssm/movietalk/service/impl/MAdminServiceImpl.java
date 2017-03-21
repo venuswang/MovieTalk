@@ -431,4 +431,53 @@ public class MAdminServiceImpl implements MAdminService {
 		return types;
 	}
 
+	@Override
+	public MListVO queryListByTag(int page, int size, int tagid)
+			throws Exception {
+		int startPage = (page - 1) * size;
+		int endPage = startPage + size - 1;
+		MListVO listVO = new MListVO();
+		List<MListExt> mList = mListExtMapper.selectAllByTag(tagid);
+		int count = mList.size();
+		if(endPage >= count) {
+			endPage = count;
+		} else {
+			endPage += 1;
+		}
+		int temp = count / size;
+		int pageCount = (temp * size == count ? temp : temp + 1);
+		if(pageCount == 0) {
+			pageCount = 1;
+		}
+		listVO.setCount(count);
+		listVO.setPageCount(pageCount);
+		listVO.setPage(page);
+		listVO.setmList(mList.subList(startPage, endPage));
+		return listVO;
+	}
+
+	@Override
+	public MListVO queryListByType(int page, int size, int type) throws Exception {
+		int startPage = (page - 1) * size;
+		int endPage = startPage + size - 1;
+		MListVO listVO = new MListVO();
+		List<MListExt> mList = mListExtMapper.selectAllByType(type);
+		int count = mList.size();
+		if(endPage >= count) {
+			endPage = count;
+		} else {
+			endPage += 1;
+		}
+		int temp = count / size;
+		int pageCount = (temp * size == count ? temp : temp + 1);
+		if(pageCount == 0) {
+			pageCount = 1;
+		}
+		listVO.setCount(count);
+		listVO.setPageCount(pageCount);
+		listVO.setPage(page);
+		listVO.setmList(mList.subList(startPage, endPage));
+		return listVO;
+	}
+
 }

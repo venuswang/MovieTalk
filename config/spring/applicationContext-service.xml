@@ -19,5 +19,12 @@
 	<bean id="mUserService" class="cn.scau.edu.ssm.movietalk.service.impl.MUserServiceImpl"></bean>
 	<bean id="mRealiseDairyService" class='cn.scau.edu.ssm.movietalk.service.impl.MRealiseDairyServiceImpl'></bean>
 	<bean id="noticeService" class='cn.scau.edu.ssm.movietalk.service.impl.NoticeServiceImpl'></bean>
+	<bean id="mStoreService" class='cn.scau.edu.ssm.movietalk.service.impl.MStoreServiceImpl'></bean>
+	<bean id="mShortReviewService" class='cn.scau.edu.ssm.movietalk.service.impl.MShortReviewServiceImpl'></bean>
+	<bean id="mLongReviewService" class='cn.scau.edu.ssm.movietalk.service.impl.MLongReviewServiceImpl'></bean>
+	<bean id="mReviewReplyService" class='cn.scau.edu.ssm.movietalk.service.impl.MReviewReplyServiceImpl'></bean>
+	<bean id="mTypeService" class='cn.scau.edu.ssm.movietalk.service.impl.MTypeServiceImpl'></bean>
+	<bean id="mTagService" class='cn.scau.edu.ssm.movietalk.service.impl.MTagServiceImpl'></bean>
 	<bean id="commonTool" class='cn.scau.edu.ssm.movietalk.tool.CommonTool'></bean>
+	<bean id="iPTool" class='cn.scau.edu.ssm.movietalk.tool.IPTool'></bean>
 </beans>

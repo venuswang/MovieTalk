@@ -8,4 +8,7 @@
   <select id="selectAll" resultType="cn.scau.edu.ssm.movietalk.po.MType" >
     	select * from m_type
   </select>
+  <select id="selectAllType" resultType="cn.scau.edu.ssm.movietalk.po.MTypeExt">
+  		select m_type.*,(select count(distinct mid) from m_mtype where m_mtype.tid = m_type.id) as total from m_type
+  </select>
 </mapper>

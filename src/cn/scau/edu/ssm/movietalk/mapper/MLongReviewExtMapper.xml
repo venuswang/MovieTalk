@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.scau.edu.ssm.movietalk.mapper.MLongReviewExtMapper" >
+  	<select id="selectByMid" parameterType="int" resultType="cn.scau.edu.ssm.movietalk.po.MLongReviewExt">
+  		select id,title,usenum,unuse from m_long_review where mid = #{id} order by usenum desc, unuse asc, rtime desc
+  	</select>
+  	<select id="selectById" parameterType="int" resultType="cn.scau.edu.ssm.movietalk.po.MLongReviewExt">
+  		select m_long_review.*,m_user.uname as uname,m_list.filname as filname from m_long_review,m_user,m_list where m_long_review.id = #{id} and m_long_review.mid = m_list.id and m_long_review.uid = m_user.id
+  	</select>
+  	<select id="selectAllReview" resultType="cn.scau.edu.ssm.movietalk.po.MLongReviewExt">
+  		select m_long_review.*,m_user.uname as uname,m_list.filname as filname from m_long_review,m_user,m_list where m_long_review.mid = m_list.id and m_long_review.uid = m_user.id order by m_long_review.usenum desc, m_long_review.unuse asc, m_long_review.rtime desc
+  	</select>
+  	<update id="addLongSuppose" parameterType="int">
+  		update m_long_review set usenum = usenum + 1 where id = #{id}
+  	</update>
+  	<update id="cancelLongSuppose" parameterType="int">
+  		update m_long_review set usenum = usenum - 1 where id = #{id}
+  	</update>
+  	<update id="addLongAnti" parameterType="int">
+  		update m_long_review set unuse = unuse + 1 where id = #{id}
+  	</update>
+  	<update id="cancelLongAnti" parameterType="int">
+  		update m_long_review set unuse = unuse - 1 where id = #{id}
+  	</update>
+</mapper>

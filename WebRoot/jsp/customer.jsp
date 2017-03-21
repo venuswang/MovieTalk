@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>后台管理员登录</title>
+    <title>会员登录</title>
     <meta charset="utf-8">
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</li>
 						</ul>
 						<div class="actions">
-							<a onclick="loginCheck()" class="btn btn-large medium-blue login-btn"> Sign in </a>
+							<a onclick="userCheck()" class="btn btn-large medium-blue login-btn"> Sign in </a>
 						</div>
 					</form>
 				</div>

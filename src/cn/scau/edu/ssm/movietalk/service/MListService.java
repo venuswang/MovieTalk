@@ -25,5 +25,6 @@ public interface MListService {
 	public void insertfilActor(List<MMactor> filmActor) throws Exception;
 	public void updatefilActor(List<MMactor> filmActor) throws Exception;
 	public MListExt queryList(Integer listId) throws Exception;
+	public MListExt queryUserList(Integer listId) throws Exception;
 	public void deleteList(int mid) throws Exception;
 }

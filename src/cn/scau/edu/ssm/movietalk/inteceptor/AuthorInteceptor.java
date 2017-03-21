@@ -52,7 +52,8 @@ public class AuthorInteceptor implements HandlerInterceptor {
 		} else if(url.contains("/custom/")) {
 			HttpSession session = request.getSession();
 			String username = (String)session.getAttribute("username");
-			if(username != null && username.length() > 0) {
+			Integer uid = (Integer)session.getAttribute("uid");
+			if(username != null && username.length() > 0 && uid != null) {
 				return true;
 			} else {
 				request.getRequestDispatcher("/jsp/customer.jsp").forward(request, response);

@@ -31,6 +31,8 @@ public interface MAdminService {
 	public TypeVO queryType(int page, int size, String typeName) throws Exception;
 	public MActorVO queryActor(int page, int size, String actorName) throws Exception;
 	public MListVO queryList(int page, int size, String listName) throws Exception;
+	public MListVO queryListByTag(int page, int size, int tagid) throws Exception;
+	public MListVO queryListByType(int page, int size, int type) throws Exception;
 	public MyResult addTag(String tagName) throws Exception;
 	public MyResult addType(String typeName) throws Exception;
 	public int addActor(MActorExt mActorExt) throws Exception;
